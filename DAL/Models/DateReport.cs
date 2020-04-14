@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
@@ -30,7 +29,7 @@ namespace DAL.Models
         public double? FinalAmountCard { get; set; }
         public double? FinalAmountCanceled { get; set; }
         public double? FinalAmountPreCanceled { get; set; }
-        [JsonIgnore]
+
         public virtual Account CreateByNavigation { get; set; }
     }
 }

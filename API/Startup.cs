@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.BussinessLogics;
+//using BLL.BussinessLogics;
 using BLL.Helpers;
 using BLL.Interfaces;
 using DAL.Models;
+//using BLL.Interfaces;
+//using DAL.Models;
 using DAL.UnitOfWorks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -116,9 +119,9 @@ namespace API
             services.AddControllers();
             #endregion
             #region Dependency
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+           services.AddScoped<IUnitOfWork, UnitOfWork>();
           //   services.AddScoped<IUserLogic, UserLogic>();
-            services.AddScoped<IGuestLogic, GuestLogic>();
+           services.AddScoped<IGuestLogic, GuestLogic>();
          //    services.AddScoped<IAdminLogic, AdminLogic>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             #endregion

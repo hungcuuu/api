@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.Helpers;
+using BLL.Interfaces;
+using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using DAL.Models;
-using BLL.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 
 namespace API.Controllers
 {
-
-    public class TablesController : BaseController
+    public class ProductsController : BaseController
     {
 
 
-        public TablesController(IGuestLogic guestLogic) : base(guestLogic)
+        public ProductsController(IGuestLogic guestLogic,
+           IOptions<HelpPage> helpPage) : base(guestLogic, helpPage)
         {
         }
         [AllowAnonymous]
@@ -28,22 +29,26 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         #endregion
-        public IActionResult GetTables()
+        public IActionResult GetProducts()
         {
             try
             {
-                var tables = _logic.GetTablesList();
-                if (tables.Count == 0)
-                    return NotFound("There are no Categories");
-
-                return Ok(tables);
+                var products = _logic.GetProductsList();
+                if (products.Count == 0)
+                    return NotFound("There are no Products");
+                var result = new
+                {
+                    products.Count,
+                    products,
+                };
+                return Ok(result);
                 //PointOfSaleDBPassioContext db = new PointOfSaleDBPassioContext();
                 //  List<Category> result = db.Category.ToList();
                 //  return Ok(result);
             }
             catch (Exception e)
             {
-                return BadRequest("System Error:\n " + e.ToString());
+                return BadRequest("System Error:\n " + e.ToString() + e.Message);
             }
         }
         [AllowAnonymous]
@@ -55,20 +60,45 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         #endregion
-        public IActionResult GetTableDetail(int id)
+        public IActionResult GetProductDetail(int id)
         {
             try
             {
-                var table = _logic.GetTableDetail(id);
-                if (table == null)
-                    return NotFound("There are no tables");
-                return Ok(table);
+                var product = _logic.GetProductDetail(id);
+                if (product == null)
+                    return NotFound("There are no Products");
+                return Ok(product);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("System Error:\n " + e.ToString() + e.Message);
+            }
+        }
+        [AllowAnonymous]
+        [HttpGet("categories")]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult GetProductsByCategory(int catId)
+        {
+            try
+            {
+                var products = _logic.GetProductsByCategory(catId);
+                if (products.Count == 0)
+                    return NotFound("There are no Products");
+
+                return Ok(products);
             }
             catch (Exception e)
             {
                 return BadRequest("System Error:\n ");
             }
         }
+
 
         [HttpPost]
         #region RepCode 200 400 401 404 500
@@ -78,16 +108,16 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         #endregion
-        public IActionResult InsertTable(Table table)
+        public IActionResult InsertProduct(Product product)
         {
             try
             {
-                if (_logic.InsertTable(table))
+                if (_logic.InsertProduct(product))
                 {
 
                     return Ok("Insert Success");
                 }
-                else return NotFound("There are no tables");
+                else return NotFound("There are no Products");
             }
             catch (Exception)
             {
@@ -103,11 +133,11 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         #endregion
-        public IActionResult UpdateTable(Table table)
+        public IActionResult UpdateProduct(Product product)
         {
             try
             {
-                if (_logic.UpdateTable(table))
+                if (_logic.UpdateProduct(product))
                 {
 
                     return Ok("Update Success");

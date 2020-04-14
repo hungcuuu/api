@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
@@ -18,7 +17,7 @@ namespace DAL.Models
         public string CardCode { get; set; }
         public bool? Active { get; set; }
         public string Code { get; set; }
-        [JsonIgnore]
+
         public virtual Order Order { get; set; }
     }
 }

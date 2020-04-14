@@ -36,14 +36,14 @@ namespace DAL.Models
         public virtual DbSet<Store> Store { get; set; }
         public virtual DbSet<Table> Table { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("User ID =sa;Password=11223344;Server=localhost;Database=PointOfSaleDBPassio;Trusted_Connection=True;");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("User ID =pos;Password=Chihung@247;Server=pos123.database.windows.net;Database=PointOfSaleDBPassio;Trusted_Connection=False;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -147,6 +147,8 @@ namespace DAL.Models
 
                 entity.Property(e => e.FeeDescription).HasMaxLength(250);
 
+                entity.Property(e => e.GroupPaymentStatus).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.LastModifiedOrderDetail).HasColumnType("datetime");
 
                 entity.Property(e => e.LastModifiedPayment).HasColumnType("datetime");
@@ -197,18 +199,6 @@ namespace DAL.Models
                 entity.Property(e => e.Notes).HasMaxLength(250);
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
-
-                entity.Property(e => e.OrderDetailId)
-                    .HasColumnName("OrderDetailID")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.ProductCode)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.ProductName)
-                    .IsRequired()
-                    .HasMaxLength(50);
 
                 entity.Property(e => e.PromotionCode).HasMaxLength(250);
 
@@ -295,9 +285,7 @@ namespace DAL.Models
 
                 entity.Property(e => e.CatId).HasColumnName("CatID");
 
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Code).HasMaxLength(50);
 
                 entity.Property(e => e.PicUrl).HasColumnName("PicURL");
 
@@ -308,7 +296,6 @@ namespace DAL.Models
                 entity.HasOne(d => d.Cat)
                     .WithMany(p => p.Product)
                     .HasForeignKey(d => d.CatId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Product_Category");
             });
 

@@ -1,4 +1,5 @@
-﻿using DAL.Models;
+﻿using BLL.RequestModels;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,34 +13,51 @@ namespace BLL.Interfaces
         IEnumerable<Category> GetCategories();
         List<Category> GetCategoriesList();
         Category GetCategoryDetail(int id);
+
+        bool InsertCategory(Category category);
+        bool UpdateCategory(Category category);
+        bool DeleteCategory(int id);
         #endregion
 
         #region Products
         IEnumerable<Product> GetProducts();
         List<Product> GetProductsList();
         List<Product> GetProductsByCategory(int CatId);
-
         Product GetProductDetail(int id);
-
+        bool InsertProduct(Product category);
+        bool UpdateProduct(Product category);
+        bool DeleteProduct(int id);
         #endregion
 
         #region Table
         IEnumerable<Table> GetTables();
         List<Table> GetTablesList();
         Table GetTableDetail(int id);
+        bool InsertTable(Table table);
+        bool UpdateTable(Table table);
+        bool DeleteTable(int id);
         #endregion
         //   public async Task<string> SignInGoogleAsync(string idToken);
 
         #region Customer
         IEnumerable<Customer> GetCustomers();
         #endregion
-      
+
         #region Orders
         IEnumerable<Order> GetOrders();
+        // List<Order> GetOrdersList();
+        //Order GetOrderById(int id);
+        //bool InsertOrder(List<RequestOrderDetail> list);
+        //bool UpdateOrder(Order category);
+        //bool DeleteOrder(int id);
+
+
         #endregion
 
         #region OrderDetail
-        IEnumerable<OrderDetail> GetOrderDetails();
+        //  IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId);
+        //bool InsertOrderDetail(OrderDetail orderDetail);
+        //bool DeleteOrderDetail(int id);
         #endregion
 
         #region Payments

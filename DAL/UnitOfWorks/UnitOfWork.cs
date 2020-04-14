@@ -15,9 +15,9 @@ namespace DAL.UnitOfWorks
             _context = context;
         }
 
-        public void Commit()
+        public int Commit()
         {
-            _context.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public void Dispose()

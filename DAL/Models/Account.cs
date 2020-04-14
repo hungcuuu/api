@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
@@ -16,9 +15,8 @@ namespace DAL.Models
         public string StaffName { get; set; }
         public int Role { get; set; }
         public bool IsUsed { get; set; }
-        [JsonIgnore]
+
         public virtual RoleName RoleNavigation { get; set; }
-        [JsonIgnore]
         public virtual ICollection<DateReport> DateReport { get; set; }
     }
 }

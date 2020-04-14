@@ -22,8 +22,8 @@ D:\FPT\api\DAL\bin\Debug\netcoreapp3.1\DAL.runtimeconfig.json
 D:\FPT\api\DAL\bin\Debug\netcoreapp3.1\DAL.runtimeconfig.dev.json
 D:\FPT\api\DAL\bin\Debug\netcoreapp3.1\DAL.dll
 D:\FPT\api\DAL\bin\Debug\netcoreapp3.1\DAL.pdb
-D:\FPT\api\DAL\obj\Debug\netcoreapp3.1\DAL.csprojAssemblyReference.cache
 D:\FPT\api\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfoInputs.cache
 D:\FPT\api\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfo.cs
 D:\FPT\api\DAL\obj\Debug\netcoreapp3.1\DAL.dll
 D:\FPT\api\DAL\obj\Debug\netcoreapp3.1\DAL.pdb
+D:\FPT\api\DAL\obj\Debug\netcoreapp3.1\DAL.csprojAssemblyReference.cache

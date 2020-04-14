@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
@@ -18,7 +17,7 @@ namespace DAL.Models
         public string Email { get; set; }
         public int? Nationality { get; set; }
         public string Notes { get; set; }
-        [JsonIgnore]
+
         public virtual ICollection<Order> Order { get; set; }
     }
 }

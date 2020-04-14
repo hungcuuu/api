@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
@@ -15,15 +14,15 @@ namespace DAL.Models
 
         public int OrderId { get; set; }
         public string OrderCode { get; set; }
-        public DateTime CheckInDate { get; set; }
+        public DateTime? CheckInDate { get; set; }
         public DateTime? CheckOutDate { get; set; }
         public DateTime? ApproveDate { get; set; }
-        public double TotalAmount { get; set; }
-        public double Discount { get; set; }
-        public double DiscountOrderDetail { get; set; }
-        public double FinalAmount { get; set; }
-        public int OrderStatus { get; set; }
-        public int OrderType { get; set; }
+        public double? TotalAmount { get; set; }
+        public double? Discount { get; set; }
+        public double? DiscountOrderDetail { get; set; }
+        public double? FinalAmount { get; set; }
+        public int? OrderStatus { get; set; }
+        public int? OrderType { get; set; }
         public string Notes { get; set; }
         public string FeeDescription { get; set; }
         public string CheckInPerson { get; set; }
@@ -36,14 +35,14 @@ namespace DAL.Models
         public DateTime? LastRecordDate { get; set; }
         public string ServedPerson { get; set; }
         public string DeliveryAddress { get; set; }
-        public int DeliveryStatus { get; set; }
+        public int? DeliveryStatus { get; set; }
         public string DeliveryPhone { get; set; }
         public string DeliveryCustomer { get; set; }
-        public int TotalInvoicePrint { get; set; }
-        public double Vat { get; set; }
-        public double Vatamount { get; set; }
-        public int NumberOfGuest { get; set; }
-        public int GroupPaymentStatus { get; set; }
+        public int? TotalInvoicePrint { get; set; }
+        public double? Vat { get; set; }
+        public double? Vatamount { get; set; }
+        public int? NumberOfGuest { get; set; }
+        public int? GroupPaymentStatus { get; set; }
         public string Att1 { get; set; }
         public string Att2 { get; set; }
         public string Att3 { get; set; }
@@ -57,17 +56,12 @@ namespace DAL.Models
         public int? PersonCount { get; set; }
         public string PaymentCode { get; set; }
         public bool? Active { get; set; }
-        [JsonIgnore]
+
         public virtual Customer Customer { get; set; }
-        [JsonIgnore]
         public virtual Source Source { get; set; }
-        [JsonIgnore]
         public virtual Table Table { get; set; }
-        [JsonIgnore]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
-        [JsonIgnore]
         public virtual ICollection<OrderPromotionMapping> OrderPromotionMapping { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Payment> Payment { get; set; }
     }
 }

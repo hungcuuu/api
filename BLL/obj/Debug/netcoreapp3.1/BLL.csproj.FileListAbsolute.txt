@@ -30,3 +30,4 @@ D:\FPT\api\BLL\bin\Debug\netcoreapp3.1\BLL.pdb
 D:\FPT\api\BLL\bin\Debug\netcoreapp3.1\DAL.dll
 D:\FPT\api\BLL\bin\Debug\netcoreapp3.1\DAL.pdb
 D:\FPT\api\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CopyComplete
+D:\FPT\api\BLL\obj\Debug\netcoreapp3.1\BLL.csprojAssemblyReference.cache

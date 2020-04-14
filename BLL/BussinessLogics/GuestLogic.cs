@@ -11,7 +11,7 @@ namespace BLL.BussinessLogics
 {
     public class GuestLogic : IGuestLogic
     {
-       
+
         protected readonly IUnitOfWork _uow;
         protected readonly IOptions<AppSetting> _options;
         // protected readonly IOptions<AdminGuide> _help;
@@ -67,6 +67,59 @@ namespace BLL.BussinessLogics
 
 
             return category;
+        }
+
+
+        public bool InsertCategory(Category category)
+        {
+            try
+            {
+                bool rs = false;
+                _uow.GetRepository<Category>()
+                   .Insert(category);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public bool UpdateCategory(Category category)
+        {
+            try
+            {
+                bool rs = false;
+                _uow.GetRepository<Category>()
+                   .Update(category);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public bool DeleteCategory(int id)
+        {
+            try
+            {
+                bool rs = false;
+                var category = GetCategories().FirstOrDefault(c => c.Id == id);
+                _uow.GetRepository<Category>().Delete(category);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
         #endregion
 
@@ -134,7 +187,57 @@ namespace BLL.BussinessLogics
                 throw e;
             }
         }
+        public bool InsertProduct(Product product)
+        {
+            try
+            {
+                bool rs = false;
+                _uow.GetRepository<Product>()
+                   .Insert(product);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+
+        }
+        public bool UpdateProduct(Product product)
+        {
+            try
+            {
+                bool rs = false;
+                _uow.GetRepository<Product>()
+                   .Update(product);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public bool DeleteProduct(int id)
+        {
+            try
+            {
+                bool rs = false;
+                var product = GetProducts().FirstOrDefault(c => c.ProductId == id);
+                _uow.GetRepository<Product>().Delete(product);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
 
 
@@ -173,9 +276,9 @@ namespace BLL.BussinessLogics
         {
             try
             {
-
                 List<Table> result = GetTables()
                 .OrderBy(c => c.DisplayOrder)
+                .Where(c => c.Status == 0)
                 .ToList();
                 return result;
             }
@@ -198,7 +301,57 @@ namespace BLL.BussinessLogics
 
             return table;
         }
+        public bool InsertTable(Table table)
+        {
+            try
+            {
+                bool rs = false;
+                _uow.GetRepository<Table>()
+                   .Insert(table);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+
+        }
+        public bool UpdateTable(Table table)
+        {
+            try
+            {
+                bool rs = false;
+                _uow.GetRepository<Table>()
+                   .Update(table);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public bool DeleteTable(int id)
+        {
+            try
+            {
+                bool rs = false;
+                var table = GetTables().FirstOrDefault(c => c.Id == id);
+                _uow.GetRepository<Table>().Delete(table);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
 
         #region Customers
@@ -240,7 +393,7 @@ namespace BLL.BussinessLogics
             throw new NotImplementedException();
         }
 
-       
+
 
 
 
