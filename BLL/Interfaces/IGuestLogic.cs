@@ -11,7 +11,7 @@ namespace BLL.Interfaces
     {
         #region Categories
         IEnumerable<Category> GetCategories();
-        List<Category> GetCategoriesList();
+        List<object> GetCategoriesList();
         Category GetCategoryDetail(int id);
 
         bool InsertCategory(Category category);
@@ -21,7 +21,7 @@ namespace BLL.Interfaces
 
         #region Products
         IEnumerable<Product> GetProducts();
-        List<Product> GetProductsList();
+        List<object> GetProductsList();
         List<Product> GetProductsByCategory(int CatId);
         Product GetProductDetail(int id);
         bool InsertProduct(Product category);

@@ -39,15 +39,16 @@ namespace BLL.BussinessLogics
             }
         }
 
-        public List<Category> GetCategoriesList()
+        public List<object> GetCategoriesList()
         {
             try
             {
 
-                List<Category> result = GetCategories()
+                var result = GetCategories()
                 .OrderBy(c => c.DisplayOrder)
+                .Select(c => new { c.Id,c.Name,c.AdjustmentNote})
                 .ToList();
-                return result;
+                return new List<object>(result);
             }
             catch (Exception e)
             {
@@ -140,14 +141,15 @@ namespace BLL.BussinessLogics
                 throw e;
             }
         }
-        public List<Product> GetProductsList()
+        public List<object> GetProductsList()
         {
             try
             {
-                List<Product> result = GetProducts()
+                var result = GetProducts()
                 .OrderBy(c => c.DisplayOrder)
+                .Select(c=> new { c.ProductId, c.ProductName, c.Price, c.PicUrl,c.CatId,c.IsMostOrder})
                 .ToList();
-                return result;
+                return new List<object>(result);
             }
             catch (Exception e)
             {
