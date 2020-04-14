@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\DAL\\DAL.csproj": {}
+    "D:\\FPT\\api\\DAL\\DAL.csproj": {}
   },
   "projects": {
-    "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\DAL\\DAL.csproj": {
+    "D:\\FPT\\api\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\DAL\\DAL.csproj",
+        "projectUniqueName": "D:\\FPT\\api\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\DAL\\DAL.csproj",
+        "projectPath": "D:\\FPT\\api\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\ngoch\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\DAL\\obj\\",
+        "outputPath": "D:\\FPT\\api\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

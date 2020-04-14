@@ -206,8 +206,8 @@ namespace BLL.BussinessLogics
         {
             try
             {
-                IEnumerable<Table> list = _uow
-                .GetRepository<Table>()
+                IEnumerable<Customer> list = _uow
+                .GetRepository<Customer>()
                 .GetAll();
 
 

@@ -10783,11 +10783,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\API\\API.csproj",
+      "projectUniqueName": "D:\\FPT\\api\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\API\\API.csproj",
+      "projectPath": "D:\\FPT\\api\\API\\API.csproj",
       "packagesPath": "C:\\Users\\ngoch\\.nuget\\packages\\",
-      "outputPath": "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\API\\obj\\",
+      "outputPath": "D:\\FPT\\api\\API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -10806,8 +10806,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\BLL\\BLL.csproj": {
-              "projectPath": "D:\\FPT\\SWD\\Final_Project\\se1304\\api\\Pos_API\\BLL\\BLL.csproj"
+            "D:\\FPT\\api\\BLL\\BLL.csproj": {
+              "projectPath": "D:\\FPT\\api\\BLL\\BLL.csproj"
             }
           }
         }
