@@ -1,5 +1,6 @@
 ﻿using BLL.Helpers;
 using BLL.Interfaces;
+using BLL.RequestModels;
 using DAL.Models;
 using DAL.UnitOfWorks;
 using Microsoft.Extensions;
@@ -381,7 +382,30 @@ namespace BLL.BussinessLogics
         {
             throw new NotImplementedException();
         }
-
+        public Order GetOrderById(int id)
+        {
+            return null;
+        }
+        public bool InsertOrder(RequestOrderDetail list)
+        {
+            return false;
+        }
+        public IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId)
+        {
+            return null;
+        }
+        public List<Order> GetOrdersList()
+        {
+            return null;
+        }
+        public bool UpdateOrder(Order category)
+        {
+            return false;
+        }
+        public bool DeleteOrder(int id)
+        {
+            return false;
+        }
         #endregion
 
         #region OrderDetails
@@ -395,7 +419,16 @@ namespace BLL.BussinessLogics
             throw new NotImplementedException();
         }
 
+        public bool InsertOrderDetail(OrderDetail orderDetail)
+        {
+            return false;
 
+        }
+        public bool DeleteOrderDetail(int id)
+        {
+            return false;
+
+        }
 
 
 

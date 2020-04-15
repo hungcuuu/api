@@ -45,19 +45,19 @@ namespace BLL.Interfaces
 
         #region Orders
         IEnumerable<Order> GetOrders();
-        // List<Order> GetOrdersList();
-        //Order GetOrderById(int id);
-        //bool InsertOrder(List<RequestOrderDetail> list);
-        //bool UpdateOrder(Order category);
-        //bool DeleteOrder(int id);
+         List<Order> GetOrdersList();
+        Order GetOrderById(int id);
+        bool InsertOrder(RequestOrderDetail list);
+        bool UpdateOrder(Order category);
+        bool DeleteOrder(int id);
 
 
         #endregion
 
         #region OrderDetail
-        //  IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId);
-        //bool InsertOrderDetail(OrderDetail orderDetail);
-        //bool DeleteOrderDetail(int id);
+          IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId);
+        bool InsertOrderDetail(OrderDetail orderDetail);
+        bool DeleteOrderDetail(int id);
         #endregion
 
         #region Payments
