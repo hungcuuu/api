@@ -56,7 +56,7 @@ namespace BLL.Interfaces
 
         #region OrderDetail
           IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId);
-        bool InsertOrderDetail(OrderDetail orderDetail);
+        bool InsertOrderDetail(RequestOrderDetail orderDetail);
         bool DeleteOrderDetail(int id);
         #endregion
 

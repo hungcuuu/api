@@ -31,17 +31,44 @@ namespace API.Controllers
         {
             try
             {
-                var categories = _logic.GetCategoriesList();
-                if (categories.Count == 0)
-                    return NotFound("There are no Categories");
+                var orders = _logic.GetOrdersList();
+                if (orders.Count == 0)
+                    return NotFound("There are no orders");
 
-                return Ok(categories);
+                return Ok(orders);
             }
             catch (Exception e)
             {
                 return BadRequest("System Error:\n " + e.Message + e.ToString());
             }
         }
+
+
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult GetOrderDetail(int id)
+        {
+            try
+            {
+                var product = _logic.GetOrderDetailsByOrderId(id);
+                if (product == null)
+                    return NotFound("There are no Products");
+                return Ok(product);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("System Error:\n " + e.ToString() + e.Message);
+            }
+        }
+
+
         [AllowAnonymous]
         [HttpPost]
         #region RepCode 200 400 401 404 500

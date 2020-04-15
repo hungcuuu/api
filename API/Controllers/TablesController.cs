@@ -87,7 +87,7 @@ namespace API.Controllers
 
                     return Ok("Insert Success");
                 }
-                else return NotFound("There are no tables");
+                else return NotFound();
             }
             catch (Exception)
             {
@@ -109,7 +109,6 @@ namespace API.Controllers
             {
                 if (_logic.UpdateTable(table))
                 {
-
                     return Ok("Update Success");
                 }
                 else return NotFound("There are no tables");

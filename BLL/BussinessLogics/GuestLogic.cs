@@ -3,6 +3,7 @@ using BLL.Interfaces;
 using BLL.RequestModels;
 using DAL.Models;
 using DAL.UnitOfWorks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions;
 using Microsoft.Extensions.Options;
 using System;
@@ -47,7 +48,7 @@ namespace BLL.BussinessLogics
 
                 var result = GetCategories()
                 .OrderBy(c => c.DisplayOrder)
-                .Select(c => new { c.Id,c.Name,c.AdjustmentNote})
+                .Select(c => new { c.Id, c.Name, c.AdjustmentNote })
                 .ToList();
                 return new List<object>(result);
             }
@@ -148,7 +149,7 @@ namespace BLL.BussinessLogics
             {
                 var result = GetProducts()
                 .OrderBy(c => c.DisplayOrder)
-                .Select(c=> new { c.ProductId, c.ProductName, c.Price, c.PicUrl,c.CatId,c.IsMostOrder})
+                .Select(c => new { c.ProductId, c.ProductName, c.Price, c.PicUrl, c.CatId, c.IsMostOrder })
                 .ToList();
                 return new List<object>(result);
             }
@@ -325,10 +326,9 @@ namespace BLL.BussinessLogics
         {
             try
             {
-                bool rs = false;
-                _uow.GetRepository<Table>()
-                   .Update(table);
-                rs = _uow.Commit() > 0 ? true : false;
+
+                _uow.GetRepository<Table>().Update(table);
+                var rs = _uow.Commit() > 0 ? true : false;
                 return rs;
             }
             catch (Exception)
@@ -380,24 +380,75 @@ namespace BLL.BussinessLogics
         #region Orders
         public IEnumerable<Order> GetOrders()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<Order> list = _uow
+                .GetRepository<Order>()
+                .GetAll()
+                //.Include(c=>c.Table.Number);
+                ;
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<Order> GetOrdersList()
+        {
+            try
+            {
+                List<Order> result = GetOrders()
+                .OrderByDescending(c => c.CheckInDate)
+                // .Where(c => c.Active == true)
+                .ToList();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
         public Order GetOrderById(int id)
         {
-            return null;
+            try
+            {
+                var order = GetOrders().FirstOrDefault(c => c.OrderId == id);
+
+                return order;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
-        public bool InsertOrder(RequestOrderDetail list)
+        public bool InsertOrder(RequestOrderDetail orderList)
         {
-            return false;
+            try
+            {
+                var order = new Order
+                {
+                    OrderCode = new Guid(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }).ToString(),
+                    NumberOfGuest = orderList.customerQuantity,
+                };
+                bool rs = false;
+                _uow.GetRepository<Order>()
+                   .Insert(order);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId)
         {
             return null;
         }
-        public List<Order> GetOrdersList()
-        {
-            return null;
-        }
+
         public bool UpdateOrder(Order category)
         {
             return false;
@@ -413,15 +464,31 @@ namespace BLL.BussinessLogics
         {
             throw new NotImplementedException();
         }
-        #endregion
-        public IEnumerable<Payment> GetPayments()
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool InsertOrderDetail(OrderDetail orderDetail)
+
+        public bool InsertOrderDetail(RequestOrderDetail orderDetail)
         {
-            return false;
+
+            try
+            {
+                var sum = GetOrders().Count();
+                var order = new Order
+                {
+                    OrderCode = "B" + sum.ToString().PadLeft(8, '0'),
+                    CheckInDate = DateTime.Now
+                    // NumberOfGuest = orderList.customerQuantity,
+                };
+                bool rs = false;
+                _uow.GetRepository<Order>()
+                   .Insert(order);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
         public bool DeleteOrderDetail(int id)
@@ -429,6 +496,12 @@ namespace BLL.BussinessLogics
             return false;
 
         }
+        #endregion
+        public IEnumerable<Payment> GetPayments()
+        {
+            throw new NotImplementedException();
+        }
+
 
 
 

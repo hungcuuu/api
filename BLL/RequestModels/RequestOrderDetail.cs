@@ -7,7 +7,7 @@ namespace BLL.RequestModels
     public class RequestOrderDetail
     {
         public int customerQuantity;
-        List<ProductOrder> list;
+        public List<ProductOrder> list;
     }
 
     public class ProductOrder
