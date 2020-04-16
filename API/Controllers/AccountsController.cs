@@ -31,7 +31,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         #endregion
-        public IActionResult Login([FromForm] UserLogin userLogin)
+        public IActionResult Login([FromBody] UserLogin userLogin)
         {
             Account user = new Account
             {
