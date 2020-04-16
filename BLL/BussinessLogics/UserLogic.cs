@@ -17,10 +17,10 @@ namespace BLL.BussinessLogics
     {
         private readonly IUnitOfWork _uow;
         private readonly AppSetting _appSetting;
-        private readonly HashMD5 _hashMD5;
-        public UserLogic(IOptions<AppSetting> appSetting, IUnitOfWork uow, HashMD5 hashMD5)
+        private readonly Services _services;
+        public UserLogic(IOptions<AppSetting> appSetting, IUnitOfWork uow, Services services)
         {
-            _hashMD5 = hashMD5;
+            _services = services;
             _uow = uow;
             _appSetting = appSetting.Value;
         }
@@ -29,7 +29,7 @@ namespace BLL.BussinessLogics
         public string Login(string userid, string password)
         {
 
-            var hashPassword = _hashMD5.GetMd5Hash(password);
+            var hashPassword = _services.GetMd5Hash(password);
             var User = _uow.GetRepository<Account>().GetAll()
                 .FirstOrDefault(user => user.AccountId == userid && user.AccountPassword == hashPassword);
 
@@ -50,14 +50,14 @@ namespace BLL.BussinessLogics
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
-
+            _services.sendMessageAsync();
             return tokenString;
         }
         public bool InsertAccount(Account account)
         {
             try
             {
-                var hashPassword = _hashMD5.GetMd5Hash(account.AccountPassword);
+                var hashPassword = _services.GetMd5Hash(account.AccountPassword);
                 account.AccountPassword = hashPassword;
                 _uow.GetRepository<Account>().Insert(account);
                 var rs = _uow.Commit() > 0 ? true : false;
@@ -95,6 +95,8 @@ namespace BLL.BussinessLogics
 
         //    return Login(userid, "password");
         //}
+
+        
     }
 
 }

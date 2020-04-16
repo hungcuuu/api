@@ -18,7 +18,7 @@ namespace API.Controllers
     public class AccountsController : BaseController
     {
 
-        public AccountsController(IUserLogic userLogic, IOptions<HashMD5> hashMd5) : base(userLogic)
+        public AccountsController(IUserLogic userLogic, IOptions<Services> service) : base(userLogic)
         {
            
         }
@@ -65,7 +65,12 @@ namespace API.Controllers
             if (response == null)
                 return Unauthorized("Login Failed. Please check username or password");
             else
+            {
+                //Services.Value.sendMessageAsync();
                 return Ok(response);
+                
+            }
+               
         }
 
         [AllowAnonymous]

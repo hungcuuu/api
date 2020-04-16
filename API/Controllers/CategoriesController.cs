@@ -13,7 +13,7 @@ namespace API.Controllers
     public class CategoriesController : BaseController
     {
 
-        public CategoriesController(IGuestLogic guestLogic) : base(guestLogic)
+        public CategoriesController(IGuestLogic guestLogic,IUserLogic userLogic) : base(guestLogic)
         {
         }
 
@@ -29,7 +29,7 @@ namespace API.Controllers
         public IActionResult GetCategories()
         {
             try
-            {
+            { 
                 var categories = _logic.GetCategoriesList();
                 if (categories.Count == 0)
                     return NotFound("There are no Categories");
@@ -55,10 +55,10 @@ namespace API.Controllers
         {
             try
             {
-                var table = _logic.GetCategoryDetail(id);
-                if (table == null)
-                    return NotFound();
-                return Ok(table);
+                var category = _logic.GetCategoryDetail(id);
+                if (category == null)
+                    return NotFound("There are no categories");
+                return Ok(category);
             }
             catch (Exception e)
             {
@@ -83,7 +83,7 @@ namespace API.Controllers
 
                     return Ok("Insert Success");
                 }
-                else return NotFound();
+                else return NotFound("There are no categories");
             }
             catch (Exception)
             {
@@ -108,7 +108,7 @@ namespace API.Controllers
 
                     return Ok("Update Success");
                 }
-                else return NotFound();
+                else return NotFound("There are no categories");
             }
             catch (Exception e)
             {
@@ -133,7 +133,7 @@ namespace API.Controllers
 
                     return Ok("Delete Success");
                 }
-                else return NotFound();
+                else return NotFound("There are no categories");
             }
             catch (Exception e)
             {

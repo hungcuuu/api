@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace DAL.Models
@@ -13,7 +14,7 @@ namespace DAL.Models
         public decimal? DiscountAmount { get; set; }
         public int? DiscountRate { get; set; }
         public int? TmpMappingId { get; set; }
-
+        [JsonIgnore]
         public virtual Order Order { get; set; }
     }
 }

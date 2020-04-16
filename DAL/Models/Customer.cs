@@ -6,10 +6,10 @@ namespace DAL.Models
 {
     public partial class Customer
     {
-        public Customer()
-        {
-            Order = new HashSet<Order>();
-        }
+        //public Customer()
+        //{
+        //    Order = new HashSet<Order>();
+        //}
 
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }

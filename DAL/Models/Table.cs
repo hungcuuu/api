@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
     public partial class Table
     {
-        public Table()
-        {
-            Order = new HashSet<Order>();
-        }
+        //public Table()
+        //{
+        //    Order = new HashSet<Order>();
+        //}
 
         public int Id { get; set; }
         public string Number { get; set; }
@@ -24,7 +25,7 @@ namespace DAL.Models
         public int? CurrentOrderId { get; set; }
         public DateTime? CurrentOrderDate { get; set; }
         public int? ForOrderType { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<Order> Order { get; set; }
     }
 }

@@ -36,14 +36,14 @@ namespace DAL.Models
         public virtual DbSet<Store> Store { get; set; }
         public virtual DbSet<Table> Table { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("User ID =pos;Password=Chihung@247;Server=pos123.database.windows.net;Database=PointOfSaleDBPassio;Trusted_Connection=False;");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("User ID =pos;Password=Chihung@247;Server=pos123.database.windows.net;Database=PointOfSaleDBPassio;Trusted_Connection=False;");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

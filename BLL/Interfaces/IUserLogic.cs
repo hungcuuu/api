@@ -10,5 +10,7 @@ namespace BLL.Interfaces
         public string Login(string userid, string password);
         //   public Account LoginFirebase(string token);
         public bool InsertAccount(Account account);
+
+        
     }
 }

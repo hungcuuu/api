@@ -519,9 +519,11 @@ D:\FPT\api\API\bin\Debug\netcoreapp3.1\BLL.pdb
 D:\FPT\api\API\bin\Debug\netcoreapp3.1\DAL.pdb
 D:\FPT\api\API\obj\Debug\netcoreapp3.1\staticwebassets\API.StaticWebAssets.Manifest.cache
 D:\FPT\api\API\obj\Debug\netcoreapp3.1\staticwebassets\API.StaticWebAssets.xml
-D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cs
-D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cache
 D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.AssemblyInfoInputs.cache
 D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.AssemblyInfo.cs
 D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.RazorTargetAssemblyInfo.cache
 D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.csproj.CopyComplete
+D:\FPT\api\API\bin\Debug\netcoreapp3.1\CorePush.dll
+D:\FPT\api\API\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cs
+D:\FPT\api\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cache

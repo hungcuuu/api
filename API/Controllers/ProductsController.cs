@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL.Helpers;
 using BLL.Interfaces;
+using BLL.RequestModels;
 using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -75,6 +76,29 @@ namespace API.Controllers
             }
         }
         [AllowAnonymous]
+        [HttpGet("search")]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult GetProductsBySearchName(string search,int pageItems,int currentPage)
+        {
+            try
+            {
+                var product = _logic.GetProductsSearchList(search,pageItems,currentPage);
+                if (product == null)
+                    return NotFound("There are no Products");
+                return Ok(product);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("System Error:\n " + e.ToString() + e.Message);
+            }
+        }
+        [AllowAnonymous]
         [HttpGet("categories")]
         #region RepCode 200 400 401 404 500
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -124,7 +148,30 @@ namespace API.Controllers
                 return BadRequest("System Error:\n ");
             }
         }
+        [HttpPut("img")]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult UpdateImageProduct(ImageRequest imageRequest)
+        {
+            try
+            {
+                if (_logic.UpdateImageProduct(imageRequest.id, imageRequest.url))
+                {
 
+                    return Ok("Insert Success");
+                }
+                else return NotFound("There are no Products");
+            }
+            catch (Exception)
+            {
+                return BadRequest("System Error:\n ");
+            }
+        }
         [HttpPut]
         #region RepCode 200 400 401 404 500
         [ProducesResponseType(StatusCodes.Status200OK)]

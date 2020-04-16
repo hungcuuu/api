@@ -63,10 +63,7 @@ namespace BLL.BussinessLogics
             // var category = _uow.GetRepository<Category>().GetAll().FirstOrDefault(c => c.Id == id);
             var category = GetCategories()
                 .FirstOrDefault(c => c.Id == id);
-            if (category == null)
-            {
-                throw new ArgumentNullException();
-            }
+           
 
 
             return category;
@@ -159,6 +156,16 @@ namespace BLL.BussinessLogics
                 throw e;
             }
         }
+        public List<object> GetProductsSearchList(string search, int pageItems, int currentPage)
+        {
+            var rs = GetProducts()
+                .Where(c => c.ProductName.ToLower().Contains(search.ToLower()))
+                .Skip((currentPage - 1) * pageItems)
+                .Take(pageItems)
+                .Select(c => new { c.ProductId, c.ProductName, c.Price, c.PicUrl, c.CatId, c.IsMostOrder })
+                .ToList();
+            return new List<object>(rs);
+        }
         public List<Product> GetProductsByCategory(int CatId)
         {
             try
@@ -181,10 +188,7 @@ namespace BLL.BussinessLogics
             {
                 Product result = GetProducts()
                 .FirstOrDefault(p => p.ProductId == proId);
-                if (result == null)
-                {
-                    throw new ArgumentNullException();
-                }
+                
                 return result;
             }
             catch (Exception e)
@@ -226,6 +230,15 @@ namespace BLL.BussinessLogics
                 throw;
             }
 
+        }
+        public bool UpdateImageProduct(int id, string url)
+        {
+            var product = GetProducts().FirstOrDefault(c => c.ProductId == id);
+            if (product == null)
+                return false;
+            product.PicUrl = url;
+            
+            return _uow.Commit()  > 0 ? true : false ;
         }
         public bool DeleteProduct(int id)
         {
@@ -299,10 +312,7 @@ namespace BLL.BussinessLogics
             // var category = _uow.GetRepository<Category>().GetAll().FirstOrDefault(c => c.Id == id);
             var table = GetTables()
                 .FirstOrDefault(c => c.Id == id);
-            if (table == null)
-            {
-                throw new ArgumentNullException();
-            }
+           
 
 
             return table;
@@ -395,10 +405,7 @@ namespace BLL.BussinessLogics
             // var category = _uow.GetRepository<Category>().GetAll().FirstOrDefault(c => c.Id == id);
             var customer = GetCustomers()
                 .FirstOrDefault(c => c.CustomerId == id);
-            if (customer == null)
-            {
-                throw new ArgumentNullException();
-            }
+            
 
 
             return customer;

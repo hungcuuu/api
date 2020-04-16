@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CorePush.Google;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace BLL.Helpers
 {
-    public class HashMD5 : ControllerBase
+    public class Services 
     {
         public string GetMd5Hash(string input)
         {
@@ -45,6 +46,23 @@ namespace BLL.Helpers
             else
             {
                 return false;
+            }
+        }
+
+        public void sendMessageAsync()
+        {
+            using (var fcm = new FcmSender("AAAAANIAdg4:APA91bHMu_e6u-n6LhobVUTHGT5AsGhRmp3y9nQSMTE3VPh-QUbwgX_8w8kA8b3BOT6mfaRRSATsGNqe7_az5clbXvS3j7xKfyuYXB0t6TGtjFlYavNmUi-Hwc2YR9wmgh99mHiv263q", "3523245582"))
+            {
+                fcm.SendAsync("BMbolvHP5_Rl_XEoxNgVBTV4ZrFUIV4iyssRRQTk60HVWvBH5UaBkplgtZEyjMm_TMa4LfCtfw2jtUZhQBLnPME",
+                   new
+                   {
+                       notification = new
+                       {
+                           title = "Test",
+                           body = "Yeah",
+
+                       },
+                   });
             }
         }
     }

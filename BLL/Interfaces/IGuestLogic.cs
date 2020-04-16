@@ -22,10 +22,12 @@ namespace BLL.Interfaces
         #region Products
         IEnumerable<Product> GetProducts();
         List<object> GetProductsList();
+        List<object> GetProductsSearchList(string search,int pageItems, int currentPage);
         List<Product> GetProductsByCategory(int CatId);
         Product GetProductDetail(int id);
         bool InsertProduct(Product category);
         bool UpdateProduct(Product category);
+        bool UpdateImageProduct(int id, string url);
         bool DeleteProduct(int id);
         #endregion
 

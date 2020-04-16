@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace DAL.Models
 {
     public partial class Product
     {
-        public Product()
-        {
-            OrderDetail = new HashSet<OrderDetail>();
-        }
+        //public Product()
+        //{
+        //    OrderDetail = new HashSet<OrderDetail>();
+        //}
 
         public int ProductId { get; set; }
         public string Code { get; set; }
@@ -38,8 +39,9 @@ namespace DAL.Models
         public int? ProductParentId { get; set; }
         public int? PrintGroup { get; set; }
         public bool? IsDefaultChildProduct { get; set; }
-
+        [JsonIgnore]
         public virtual Category Cat { get; set; }
+        [JsonIgnore]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
     }
 }

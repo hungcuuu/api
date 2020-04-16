@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace DAL.Models
@@ -17,7 +18,7 @@ namespace DAL.Models
         public string CardCode { get; set; }
         public bool? Active { get; set; }
         public string Code { get; set; }
-
+        [JsonIgnore]
         public virtual Order Order { get; set; }
     }
 }

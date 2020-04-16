@@ -62,7 +62,10 @@ namespace API
 
             // configure admin guidance
             var register = Configuration.GetSection("RegisterGuide");
-            services.Configure<RegisterGuide>(register);
+            services.Configure<RegisterGuide>(register); 
+            
+            var service = Configuration.GetSection("Services");
+            services.Configure<RegisterGuide>(service);
             #endregion
 
             #region Swagger
@@ -164,7 +167,7 @@ namespace API
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserLogic, UserLogic>();
             services.AddScoped<IGuestLogic, GuestLogic>();
-            services.AddScoped<HashMD5, HashMD5>();
+            services.AddScoped<Services, Services>();
             //    services.AddScoped<IAdminLogic, AdminLogic>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             #endregion

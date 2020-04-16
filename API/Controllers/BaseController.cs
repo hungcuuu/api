@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using BLL.Helpers;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -13,6 +14,7 @@ namespace API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class BaseController : ControllerBase
     {
         #region objects and constructors
@@ -27,7 +29,7 @@ namespace API.Controllers
         protected readonly IOptions<HelpPage> _helpPage;
         //protected readonly IOptions<IndexPage> _indexPage;
         protected readonly IOptions<AppSetting> _options;
-        protected readonly IOptions<HashMD5> _hashMD5;
+        protected readonly IOptions<Services> _services;
         protected readonly IHttpContextAccessor _httpContext;
 
         public BaseController(IGuestLogic logic)
@@ -40,9 +42,9 @@ namespace API.Controllers
             _userLogic = userLogic;
         }
 
-        public BaseController(IUserLogic userLogic, IOptions<HashMD5> hashMD5) : this(userLogic)
+        public BaseController(IUserLogic userLogic, IOptions<Services> services) : this(userLogic)
         {
-            _hashMD5 = hashMD5;
+            _services = services;
         }
 
         public BaseController(IGuestLogic logic, IOptions<HelpPage> helpPage) : this(logic)
