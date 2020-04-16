@@ -20,24 +20,51 @@ namespace API.Controllers
 
 
         protected ClaimsIdentity identity;
-
+      //  private readonly IUserLogic userLogic;
         protected readonly IGuestLogic _logic;
         //protected readonly IAdminLogic _adminLogic;
-        // protected readonly IUserLogic _userLogic;
+         protected readonly IUserLogic _userLogic;
         protected readonly IOptions<HelpPage> _helpPage;
         //protected readonly IOptions<IndexPage> _indexPage;
         protected readonly IOptions<AppSetting> _options;
+        protected readonly IOptions<HashMD5> _hashMD5;
         protected readonly IHttpContextAccessor _httpContext;
 
         public BaseController(IGuestLogic logic)
         {
             _logic = logic;
         }
-        public BaseController(IGuestLogic guestLogic, IOptions<HelpPage> helpPage)
+
+        public BaseController(IUserLogic userLogic)
         {
-            _logic = guestLogic;
+            _userLogic = userLogic;
+        }
+
+        public BaseController(IUserLogic userLogic, IOptions<HashMD5> hashMD5) : this(userLogic)
+        {
+            _hashMD5 = hashMD5;
+        }
+
+        public BaseController(IGuestLogic logic, IOptions<HelpPage> helpPage) : this(logic)
+        {
             _helpPage = helpPage;
         }
+
+        //public BaseController(IGuestLogic logic)
+        //{
+        //    _logic = logic;
+        //}
+        //public BaseController(IGuestLogic guestLogic, IOptions<HelpPage> helpPage)
+        //{
+        //    _logic = guestLogic;
+        //    _helpPage = helpPage;
+        //}
+
+        //public BaseController(IUserLogic userLogic, IOptions<HashMD5> hashMD5)
+        //{
+        //    _userLogic = userLogic;
+        //    _hashMD5 = hashMD5;
+        //}
 
         #endregion
     }

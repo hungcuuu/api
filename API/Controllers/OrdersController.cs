@@ -18,7 +18,8 @@ namespace API.Controllers
         {
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
+        [Authorize]
         [HttpGet]
         #region RepCode 200 400 401 404 500
         [ProducesResponseType(StatusCodes.Status200OK)]

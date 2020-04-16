@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
     public partial class Order
     {
-        public Order()
-        {
-            OrderDetail = new HashSet<OrderDetail>();
-            OrderPromotionMapping = new HashSet<OrderPromotionMapping>();
-            Payment = new HashSet<Payment>();
-        }
+        //public Order()
+        //{
+        //    OrderDetail = new HashSet<OrderDetail>();
+        //    OrderPromotionMapping = new HashSet<OrderPromotionMapping>();
+        //    Payment = new HashSet<Payment>();
+        //}
 
         public int OrderId { get; set; }
         public string OrderCode { get; set; }
@@ -56,12 +57,17 @@ namespace DAL.Models
         public int? PersonCount { get; set; }
         public string PaymentCode { get; set; }
         public bool? Active { get; set; }
-
+        [JsonIgnore]
         public virtual Customer Customer { get; set; }
+        [JsonIgnore]
         public virtual Source Source { get; set; }
+        [JsonIgnore]
         public virtual Table Table { get; set; }
+        [JsonIgnore]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
+        [JsonIgnore]
         public virtual ICollection<OrderPromotionMapping> OrderPromotionMapping { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Payment> Payment { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
@@ -20,7 +21,7 @@ namespace DAL.Models
         public string AdjustmentNote { get; set; }
         public string ImageFontAwsomeCss { get; set; }
         public int? ParentCateId { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<Product> Product { get; set; }
     }
 }

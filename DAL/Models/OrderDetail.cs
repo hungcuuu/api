@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DAL.Models
 {
@@ -23,8 +25,9 @@ namespace DAL.Models
         public int? OrderDetailPromotionMappingId { get; set; }
         public bool? Active { get; set; }
         public string Code { get; set; }
-
+        [JsonIgnore]
         public virtual Order Order { get; set; }
+        [JsonIgnore]
         public virtual Product Product { get; set; }
     }
 }

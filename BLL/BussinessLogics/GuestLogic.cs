@@ -526,9 +526,19 @@ namespace BLL.BussinessLogics
                 throw;
             }
         }
-        public IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId)
+        public List<OrderDetail> GetOrderDetailsByOrderId(int orderId)
         {
-            return null;
+            try
+            {
+                List<OrderDetail> result = GetOrderDetails()
+                 .Where(c => c.OrderId == orderId)
+                .ToList();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public bool UpdateOrder(Order category)
@@ -544,7 +554,16 @@ namespace BLL.BussinessLogics
         #region OrderDetails
         public IEnumerable<OrderDetail> GetOrderDetails()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<OrderDetail> result = _uow.GetRepository<OrderDetail>()
+                .GetAll();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
 
