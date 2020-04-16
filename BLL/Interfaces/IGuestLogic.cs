@@ -41,13 +41,18 @@ namespace BLL.Interfaces
 
         #region Customer
         IEnumerable<Customer> GetCustomers();
+        List<Customer> GetCustomersList();
+        Customer GetCustomerDetail(int id);
+        bool DeleteCustomer(int id);
+        bool UpdateCustomer(Customer customer);
+        bool InsertCustomer(Customer customer);
         #endregion
 
         #region Orders
         IEnumerable<Order> GetOrders();
-         List<Order> GetOrdersList();
+        List<Order> GetOrdersList();
         Order GetOrderById(int id);
-        bool InsertOrder(RequestOrderDetail list);
+        bool InsertOrder(string orderCode, int numOfcustomer);
         bool UpdateOrder(Order category);
         bool DeleteOrder(int id);
 
@@ -55,8 +60,8 @@ namespace BLL.Interfaces
         #endregion
 
         #region OrderDetail
-          IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId);
-        bool InsertOrderDetail(RequestOrderDetail orderDetail);
+        IEnumerable<OrderDetail> GetOrderDetailsByOrderId(int orderId);
+        bool InsertOrderDetail(List<ProductOrder> orderDetail, string orderCode);
         bool DeleteOrderDetail(int id);
         #endregion
 

@@ -78,6 +78,7 @@ namespace BLL.BussinessLogics
             try
             {
                 bool rs = false;
+                category.IsDisplayed = true;
                 _uow.GetRepository<Category>()
                    .Insert(category);
                 rs = _uow.Commit() > 0 ? true : false;
@@ -195,6 +196,7 @@ namespace BLL.BussinessLogics
         {
             try
             {
+                product.IsAvailable = true;
                 bool rs = false;
                 _uow.GetRepository<Product>()
                    .Insert(product);
@@ -374,6 +376,83 @@ namespace BLL.BussinessLogics
                 throw e;
             }
         }
+        public List<Customer> GetCustomersList()
+        {
+            try
+            {
+                List<Customer> result = GetCustomers()
+                .ToList();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public Customer GetCustomerDetail(int id)
+        {
+            // var category = _uow.GetRepository<Category>().GetAll().FirstOrDefault(c => c.Id == id);
+            var customer = GetCustomers()
+                .FirstOrDefault(c => c.CustomerId == id);
+            if (customer == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+
+            return customer;
+        }
+        public bool InsertCustomer(Customer customer)
+        {
+            try
+            {
+                bool rs = false;
+                _uow.GetRepository<Customer>()
+                   .Insert(customer);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public bool UpdateCustomer(Customer customer)
+        {
+            try
+            {
+
+                _uow.GetRepository<Customer>().Update(customer);
+                var rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public bool DeleteCustomer(int id)
+        {
+            try
+            {
+                bool rs = false;
+                var customer = GetCustomers().FirstOrDefault(c => c.CustomerId == id);
+                _uow.GetRepository<Customer>().Delete(customer);
+                rs = _uow.Commit() > 0 ? true : false;
+                return rs;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         #endregion
 
@@ -423,14 +502,17 @@ namespace BLL.BussinessLogics
                 throw e;
             }
         }
-        public bool InsertOrder(RequestOrderDetail orderList)
+        public bool InsertOrder(string orderCode,int numOfcustomer)
         {
             try
             {
+
                 var order = new Order
                 {
-                    OrderCode = new Guid(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }).ToString(),
-                    NumberOfGuest = orderList.customerQuantity,
+                    OrderCode = orderCode,
+                    CheckInDate = DateTime.Now,
+                    NumberOfGuest = numOfcustomer
+                    
                 };
                 bool rs = false;
                 _uow.GetRepository<Order>()
@@ -466,22 +548,19 @@ namespace BLL.BussinessLogics
         }
 
 
-        public bool InsertOrderDetail(RequestOrderDetail orderDetail)
+        public bool InsertOrderDetail(List<ProductOrder> orderDetail,string orderCode)
         {
 
             try
             {
-                var sum = GetOrders().Count();
-                var order = new Order
-                {
-                    OrderCode = "B" + sum.ToString().PadLeft(8, '0'),
-                    CheckInDate = DateTime.Now
-                    // NumberOfGuest = orderList.customerQuantity,
-                };
-                bool rs = false;
-                _uow.GetRepository<Order>()
-                   .Insert(order);
-                rs = _uow.Commit() > 0 ? true : false;
+                var order = GetOrders().FirstOrDefault(c => c.OrderCode == orderCode);
+                if (order == null)
+                    return false;
+                foreach(ProductOrder product in orderDetail) {
+                    var item = new OrderDetail { OrderId = order.OrderId, ProductId = product.productId, Quantity = product.quantity};
+                    _uow.GetRepository<OrderDetail>().Insert(item);
+                }
+               var rs = _uow.Commit() > 0 ? true : false;
                 return rs;
             }
             catch (Exception)

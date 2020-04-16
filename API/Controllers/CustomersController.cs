@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    
+
     public class CustomersController : BaseController
     {
         public CustomersController(IGuestLogic guestLogic) : base(guestLogic)
         {
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet]
         #region RepCode 200 400 401 404 500
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -26,19 +26,119 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         #endregion
-        public IActionResult GetOrders()
+        public IActionResult GetCustomers()
         {
             try
             {
-                PointOfSaleDBPassioContext db = new PointOfSaleDBPassioContext();
-                var customer = db.Customer.ToList();
-                
-                return Ok(customer);
+                var rs = _logic.GetCustomersList();
+                if (rs.Count == 0)
+                    return NotFound("There are no Customers");
+                return Ok(rs);
 
             }
             catch (Exception e)
             {
                 return BadRequest("System Error:\n " + e.Message + e.ToString());
+            }
+        }
+
+        [HttpGet("{id}")]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult GetCustomerDetail(int id)
+        {
+            try
+            {
+                var customer = _logic.GetCustomerDetail(id);
+                if (customer == null)
+                    return NotFound("There are no Customers");
+                return Ok(customer);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("System Error:\n " + e.ToString() + e.Message);
+            }
+        }
+
+
+
+        [HttpPost]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult InsertCustomer(Customer customer)
+        {
+            try
+            {
+                if (_logic.InsertCustomer(customer))
+                {
+
+                    return Ok("Insert Success");
+                }
+                else return NotFound("There are no Customers");
+            }
+            catch (Exception)
+            {
+                return BadRequest("System Error:\n ");
+            }
+        }
+
+        [HttpPut]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult UpdateCustomer(Customer customer)
+        {
+            try
+            {
+                if (_logic.UpdateCustomer(customer))
+                {
+
+                    return Ok("Update Success");
+                }
+                else return NotFound("There are no Customers");
+            }
+            catch (Exception e)
+            {
+                return BadRequest("System Error:\n " + e.ToString());
+            }
+        }
+
+        [HttpDelete]
+        #region RepCode 200 400 401 404 500
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        #endregion
+        public IActionResult DeleteCustomer(int id)
+        {
+            try
+            {
+                if (_logic.DeleteCustomer(id))
+                {
+
+                    return Ok("Delete Success");
+                }
+                else return NotFound("There are no Customers");
+            }
+            catch (Exception e)
+            {
+                return BadRequest("System Error:\n " + e.ToString());
             }
         }
     }

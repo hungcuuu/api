@@ -66,7 +66,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest("System Error:\n ");
+                return BadRequest("System Error:\n "+e.Message);
             }
         }
 
